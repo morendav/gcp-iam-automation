@@ -1,0 +1,12 @@
+################################################
+################################################
+###     ~~Policy <-> Project Name Mapping ~~
+################################################
+################################################
+Repo_YML_FileName^PROJECT_ID
+aws-link-dev-w.yml^no_policy_file_on_record
+connected-products.yml^connected-products
+some_policy_file_name_1.yml^project_1
+some_policy_file_name_2.yml^project_2
+some_policy_file_name_3.yml^project_3
+some_policy_file_name_4.yml^project_4

@@ -1,0 +1,16 @@
+gs://artifacts.example-pe-prod.appspot.com/
+gs://example2-imn-intermediate-prod/
+gs://example2-perf-test-prod/
+gs://example2-raw-layers-prod/
+gs://example2-refined-layers-prod/
+gs://thing1-thing2-incubator/
+gs://thing1-thing2-stable/
+gs://example3-project-example-dev/
+gs://example3-project-example-local/
+gs://example3-project-example-prod/
+gs://example3-project-example-promo-local/
+gs://example3-project-example-promo-prod/
+gs://example3-project-example-promo-stage/
+gs://example3-project-example-stage/
+gs://example3-project-promotion-archive-prod/
+gs://example3-project-promotion-archive-stage/

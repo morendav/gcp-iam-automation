@@ -1,0 +1,48 @@
+################################################
+################################################
+###  Automated GCP Policy File Management App
+################################################
+################################################
+
+The (autoGCPPolicyScript.sh) Linux shell script automates the pushing of files modified in the GCP Policy File repo to the Google Cloud Platform.
+
+################################################
+################################################
+
+[[  Prerequisites ]]
+  - GCLOUD application is installed on the linux machine running the shell script
+  - User authenticated to GCLOUD has privileges to get and set policy files
+  - GitHub origin working branch exists on the local linux machine running the script
+  - User authenticated to Git is able to push, pull from GitHub Master repo
+[[  Assumptions ]]
+  - Modifications for google cloud privilege escalations are being made by PRing directly into the master branch repo (https://git.target.com/cloud-security-engineering/csp-access-policies)
+  - User Policies are maintained in YML files (implicit assumption in idPolicyFiles.sh script)
+  - Bucket Policies are maintained in YML files (implicit assumption in idPolicyFiles.sh script)
+################################################
+################################################
+
+[[  Scripts Run ]]
+MAIN SCRIPT - {gcloudPolicyFilePush.sh}
+  + identify which policy files were updated since last run
+  + recursively patch those yml files with:
+      - google cloud service accounts (non-repo added SAs)
+      - eTags if mismatching
+  + Push patched ymls to cloud platform
+  + Log operations
+
+PERIPHERAL SCRIPT - {autoGCPPolicyScript.sh}
+  + script called to push ymls to cloud
+  + commented out for dry (reporting only) runs in main script
+
+PERIPHERAL SCRIPT - {idPolicyFiles.sh}
+  + script called to id which yml files were modified since last run
+  + "last run" hard set to n = 1 days since runtime
+
+[[  Other Required Files ]]
+{./References/policyMappingfile.txt}
+  + Mapping between conventions used:
+      policy.yml names <--> Google cloud project names
+  + For Google Projects in universe run:
+      gcloud projects list | awk '{print $1}'
+  + For all YML files in GitHub Universe run:
+      find ./gcp/org/project -name "*.yml" | cut -d "/" -f 6

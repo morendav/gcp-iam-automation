@@ -1,0 +1,9 @@
+#################################################
+### Print all projects in GCP
+#################################################
+### Policy Mapping
+#   gcloud projects list | awk '{print $1}'
+#   find ./gcp/org/project -name "*.yml" | cut -d "/" -f 6
+Repo_YML_FileName//PROJECT_ID
+aws-link-dev-w.yml//no_policy_file_on_record
+connected-products.yml//connected-products
