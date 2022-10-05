@@ -1,16 +1,24 @@
 # GCP_autoPolicyPush
-Project aimed to automate the fulfillment of Google Cloud Platform permission escalation requests
+Project to automate the fulfillment of Google Cloud Platform permission escalation requests
 
->Language: Linux Shell, automated solution to reconcile current GCP permissions set with PR, merge, and push new permissions to GCP production
+> Language: Linux Shell, automated solution to reconcile current GCP permissions set with PR, merge, and push new permissions to GCP production
 
 ## Description
-Problem Statement: Our IAM enterprise solution addresses account creation in GSUITE and the assignment of users to usergroups. Permissions are handled at the group level and assigned by either custom or public Google Cloud permission sets (Google Roles). A group admin may request permission escalation through a github PR wherein they add their group to the appropriate Google role in the .yml corresponding to the development env they would need the elevated permissions in (ie Google Project = Dev, Test, Prod, etc).
+Problem statement:
+* to this point, account creation in GSUITE and the assignment of users to usergroups.
+* Permissions are handled at the group level and assigned by either custom or public Google Cloud permission sets (Google Roles).
+* A group admin may request permission escalation through a github PR wherein they add their group to the appropriate Google role in the .yml corresponding to the development env they would need the elevated permissions in (ie Google Project = Dev, Test, Prod, etc).
+* The repo serves as auditable record of access held by groups. However; because this is a static representation, the service accounts that Google adds as feature enhancements or fixes would not be in our repo and therefore when the next escalation was fulfilled the service account would be overwritten and functionality would be lost.
 
-The Repo is our auditable record of access held by groups. However; because this is a static representation, the service accounts that Google adds as feature enhancements or fixes would not be in our repo and therefore when the next escalation was fulfilled the service account would be overwritten and functionality would be comprimized.
+**What this means**
+* YAML files for projects should be pushed to GCP projects but not overwrite the service accounts - so reconciliation between these are needed
+
+**solution**
+* For each project in 'prodBucketList.txt' push updated yml files to Git (effectively updating policies in gcp projects)
 
 ### Prerequisites
 
-origin git repos on local holding copies of the most recent GCP IAM policy deployments
+* origin git repos on local holding copies of the most recent GCP IAM policy deployments
 
 ##  Notes
 
@@ -22,3 +30,6 @@ Google Service Account reconcile
 
 Escalations made out of band
 >   sometimes users and user groups add themselves directly to permission sets, this is out of band with our enterprise solution and therefore this script automatically takes these permissions away.
+
+
+###
